@@ -160,7 +160,7 @@ class Bot:
             
     def clickelement(self, name):
         element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, name))
+            EC.presence_of_element_located((By.NAME, name))
         )
         element.click()
 
