@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import telegram
-from telegram.ext import Updater, CommandHandler, Filters
+from telegram.ext import Updater, CommandHandler, Filters, MessageHandler
 from random import randint
 from tarot import *
 from private import TOKEN
@@ -36,6 +36,7 @@ class Bot:
         self.dispatcher.add_handler(CommandHandler('card', self.card))
         self.dispatcher.add_handler(CommandHandler('wheel', self.wheel))
         self.dispatcher.add_handler(CommandHandler('update', self.update))
+        self.dispatcher.add_handler(MessageHandler(Filters.status_update.new_chat_members, self.card)
         #self.dispatcher.add_handler(CommandHandler('chart', self.chart))
         self.updater.start_polling()
         print "Polling"
@@ -63,12 +64,12 @@ class Bot:
     
     def card(self, bot, update):
         print "Card"
-        text = update.message.text.split(' ')
         try:
+            text = update.message.text.split(' ')
             self.replyphoto(update, card[int(text[1])])
         except:
             n = randint(0, 21)
-            self.replyphoto(update, card[int(n)])
+            self.replyphoto(update, card[n])
             
     def wheel(self, bot, update):
         print "Wheel"
