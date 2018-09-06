@@ -8,6 +8,7 @@ from private import TOKEN
 import subprocess
 import os
 import traceback
+from pyvirtualdisplay import Display
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
@@ -23,6 +24,8 @@ class Bot:
         #options = Options()
         #options.add_argument("--headless")
         #self.driver = webdriver.Firefox(firefox_options=options)
+        self.display = Display(visible=0, size=(1024, 768))
+        self.display.start()
         options = Options()
         options.add_argument("--headless")
         self.driver = webdriver.Firefox(firefox_options=options)
