@@ -43,6 +43,8 @@ class Bot:
         self.driver.quit()
         self.display.stop()
         self.updater.stop()
+        subprocess.Popen("killall Web\ Content", shell=True)
+        subprocess.Popen("killall firefox-esr", shell=True)
         
     def tarot(self, bot, update):
         print "Tarot"
@@ -113,7 +115,9 @@ class Bot:
             #text = self.driver.execute_script("return document.getElementsByTagName('h2')[0].innerHTML") + "\n" + self.driver.execute_script("return document.getElementsByTagName('h2')[1].innerHTML")
             #self.reply(update, text)
             #self.driver.quit()
-            element = self.driver.find_element_by_tag_name("svg")
+            element = self.WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.TAG_NAME, "svg"))
+            )
             location = element.location
             self.driver.execute_script("window.scrollTo(0, %s);" % location["y"])
             size = element.size
