@@ -35,7 +35,7 @@ class Bot:
         self.dispatcher.add_handler(CommandHandler('tarot', self.tarot))
         self.dispatcher.add_handler(CommandHandler('card', self.card))
         self.dispatcher.add_handler(CommandHandler('wheel', self.wheel))
-        self.dispatcher.add_handler(CommandHandler('update', self.wheel))
+        self.dispatcher.add_handler(CommandHandler('update', self.update))
         #self.dispatcher.add_handler(CommandHandler('chart', self.chart))
         self.updater.start_polling()
         print "Polling"
@@ -85,6 +85,7 @@ class Bot:
     def update(self, bot, update):
          result = subprocess.Popen("git pull", shell=True, stdout=subprocess.PIPE).stdout.read()
          self.reply(update, result)
+         subprocess.Popen("sudo service cmbot restart", shell=True
             
     def chart(self, bot, update):
         print "Chart"
