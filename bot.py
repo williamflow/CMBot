@@ -95,10 +95,13 @@ class Bot:
             self.driver.execute_script("document.getElementsByName('date[Y]')[0].setAttribute('value', '"+text[4]+"')")
             self.sendtoelement("heure[H]", text[5])
             self.sendtoelement("heure[i]", text[6])
-            cookie = WebDriverWait(self.driver, 10).until(
+            try:
+                cookie = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located((By.ID, "fermeture_cookie"))
-            )
-            cookie.click()
+                )
+                cookie.click()
+            except:
+                pass
             self.sendtoelement("ville", " ".join(text[7:]))
             ui = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located((By.CLASS_NAME, "ui-menu-item"))
