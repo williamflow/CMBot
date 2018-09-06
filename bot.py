@@ -67,7 +67,8 @@ class Bot:
         try:
             self.replyphoto(update, card[int(text[1])])
         except:
-            traceback.print_exc()
+            n = randint(0, 21)
+            self.replyphoto(update, card[int(n)])
             
     def wheel(self, bot, update):
         print "Wheel"
