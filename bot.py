@@ -40,9 +40,9 @@ class Bot:
         print "Polling"
     
     def stop(self):
+        self.driver.quit()
+        self.display.stop()
         self.updater.stop()
-        if self.driver is not False:
-            self.driver.quit()
         
     def tarot(self, bot, update):
         print "Tarot"
@@ -106,10 +106,10 @@ class Bot:
             except:
                 pass
             self.sendtoelement("ville", " ".join(text[7:]))
-            self.clickelement("ui-menu-item")
+            self.clickelement(By.CLASS_NAME, "ui-menu-item")
             #ui = self.driver.find_element_by_class_name("ui-menu-item")
-            self.clickelement("_qf_s1_next")
-            self.clickelement("_qf_s2_next")
+            self.clickelement(By.NAME, "_qf_s1_next")
+            self.clickelement(By.NAME, "_qf_s2_next")
             #text = self.driver.execute_script("return document.getElementsByTagName('h2')[0].innerHTML") + "\n" + self.driver.execute_script("return document.getElementsByTagName('h2')[1].innerHTML")
             #self.reply(update, text)
             #self.driver.quit()
@@ -158,9 +158,9 @@ class Bot:
         element = self.driver.find_element_by_name(str(name))
         element.send_keys(str(keys))
             
-    def clickelement(self, name):
+    def clickelement(self, by, name):
         element = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.NAME, name))
+            EC.presence_of_element_located((by, name))
         )
         element.click()
 
