@@ -106,11 +106,8 @@ class Bot:
             except:
                 pass
             self.sendtoelement("ville", " ".join(text[7:]))
-            ui = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_element_located((By.CLASS_NAME, "ui-menu-item"))
-            )
+            self.clickelement("ui-menu-item")
             #ui = self.driver.find_element_by_class_name("ui-menu-item")
-            ui.click()
             self.clickelement("_qf_s1_next")
             self.clickelement("_qf_s2_next")
             #text = self.driver.execute_script("return document.getElementsByTagName('h2')[0].innerHTML") + "\n" + self.driver.execute_script("return document.getElementsByTagName('h2')[1].innerHTML")
@@ -162,7 +159,9 @@ class Bot:
         element.send_keys(str(keys))
             
     def clickelement(self, name):
-        element = self.driver.find_element_by_name(str(name))
+        element = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, name))
+        )
         element.click()
 
 if __name__ == "__main__":
