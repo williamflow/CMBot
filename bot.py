@@ -85,7 +85,7 @@ class Bot:
     def update(self, bot, update):
          result = subprocess.Popen("git pull", shell=True, stdout=subprocess.PIPE).stdout.read()
          self.reply(update, result)
-         subprocess.Popen("sudo service cmbot restart", shell=True
+         subprocess.Popen("sudo service cmbot restart", shell=True)
             
     def chart(self, bot, update):
         print "Chart"
