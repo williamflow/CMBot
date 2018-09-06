@@ -1,0 +1,15 @@
+[Unit]
+Description=CMBot
+After=network.target
+
+[Service]
+RestartSec=2s
+Type=simple
+User=cmbot
+Group=cmbot
+WorkingDirectory=/home/cmbot/CMBot
+ExecStart=/home/cmbot/CMBot/bot.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target 
