@@ -35,7 +35,7 @@ class Bot:
         self.dispatcher.add_handler(CommandHandler('tarot', self.tarot))
         self.dispatcher.add_handler(CommandHandler('card', self.card))
         self.dispatcher.add_handler(CommandHandler('wheel', self.wheel))
-        self.dispatcher.add_handler(CommandHandler('chart', self.chart))
+        #self.dispatcher.add_handler(CommandHandler('chart', self.chart))
         self.updater.start_polling()
         print "Polling"
     
