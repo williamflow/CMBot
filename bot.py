@@ -8,15 +8,15 @@ from private import TOKEN
 import subprocess
 import os
 import traceback
-from pyvirtualdisplay import Display
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from PIL import Image
-from cStringIO import StringIO
-from io import BytesIO
+#from pyvirtualdisplay import Display
+#from selenium import webdriver
+#from selenium.webdriver.firefox.options import Options
+#from selenium.webdriver.common.by import By
+#from selenium.webdriver.support.ui import WebDriverWait
+#from selenium.webdriver.support import expected_conditions as EC
+#from PIL import Image
+#from cStringIO import StringIO
+#from io import BytesIO
 
 class Bot:
     def __init__(self, token):
@@ -24,12 +24,12 @@ class Bot:
         #options = Options()
         #options.add_argument("--headless")
         #self.driver = webdriver.Firefox(firefox_options=options)
-        self.display = Display(visible=0, size=(1024, 768))
-        self.display.start()
-        options = Options()
-        options.add_argument("--headless")
-        self.driver = webdriver.Firefox(firefox_options=options)
-        self.driveravaible = True
+        #self.display = Display(visible=0, size=(1024, 768))
+        #self.display.start()
+        #options = Options()
+        #options.add_argument("--headless")
+        #self.driver = webdriver.Firefox(firefox_options=options)
+        #self.driveravaible = True
         self.bot = self.updater.bot
         self.dispatcher = self.updater.dispatcher
         self.dispatcher.add_handler(CommandHandler('tarot', self.tarot))
