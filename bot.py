@@ -89,7 +89,10 @@ class Bot:
         self.sendtyping(update)
         try:
             self.driver.get('https://www.astrotheme.com/horoscope_chart_sign_ascendant.php')
-            self.sendtoelement("prenom", text[1])
+            element = self.driver.find_element_by_name("prenom")
+            location = element.location
+            self.driver.execute_script("window.scrollTo(0, %s);" % location["y"])
+            element.send_keys(text[1])
             self.sendtoelement("date[d][d]", text[2])
             self.sendtoelement("date[F][F]", text[3])
             self.driver.execute_script("document.getElementsByName('date[Y]')[0].setAttribute('value', '"+text[4]+"')")
