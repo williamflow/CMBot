@@ -82,7 +82,7 @@ class Bot:
             self.replyphoto(update, card[int(text[1])])
         except:
             n = randint(0, 21)
-            self.replyphoto(update, card[n])
+            self.replyphoto(update, card[int(n)])
             
     def wheel(self, bot, update):
         print "Wheel"
