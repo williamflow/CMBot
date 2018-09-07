@@ -77,6 +77,7 @@ class Bot:
     
     def card(self, bot, update):
         print "Card"
+        print update.message
         try:
             text = update.message.text.split(' ')
             self.replyphoto(update, card[int(text[1])])
