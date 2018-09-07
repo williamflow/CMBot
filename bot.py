@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import telegram
-from telegram.ext import Updater, CommandHandler, Filters, MessageHandler
+from telegram.ext import Updater, CommandHandler, Filters, MessageHandler, BaseFilter
 from random import randint
 from tarot import *
 from private import TOKEN
@@ -32,11 +32,8 @@ class Bot:
         #self.driveravaible = True
         self.bot = self.updater.bot
         self.dispatcher = self.updater.dispatcher
-        self.dispatcher.add_handler(CommandHandler('tarot', self.tarot))
-        self.dispatcher.add_handler(CommandHandler('card', self.card))
-        self.dispatcher.add_handler(CommandHandler('wheel', self.wheel))
-        self.dispatcher.add_handler(CommandHandler('update', self.update))
-        self.dispatcher.add_handler(MessageHandler(Filters.status_update.new_chat_members, self.card))
+        self.filternull = FilterNull()
+        self.dispatcher.add_handler(MessageHandler(self.filternull, self.callback))
         #self.dispatcher.add_handler(CommandHandler('chart', self.chart))
         self.updater.start_polling()
         print "Polling"
@@ -47,7 +44,27 @@ class Bot:
         self.updater.stop()
         subprocess.Popen("killall Web\ Content", shell=True)
         subprocess.Popen("killall firefox-esr", shell=True)
-        
+    
+    def callback(self, bot, update):
+        try:
+            if len(update.message.new_chat_members) > 0:
+                self.send(self.getchatid(0, update), "Welcome card!")
+                self.card(bot, update)
+        except:
+            pass
+        try:
+            cmd = update.message.text.split(' ')[0].split('@')[0]
+            if cmd == "/tarot":
+                self.tarot(bot, update)
+            elif cmd == "/card":
+                self.card(bot, update)
+            elif cmd == "/wheel":
+                self.wheel(bot, update)
+            elif cmd == "/update":
+                self.update(bot, update)
+        except:
+            pass
+    
     def tarot(self, bot, update):
         print "Tarot"
         text = update.message.text.split(' ')
@@ -175,6 +192,10 @@ class Bot:
             EC.presence_of_element_located((by, name))
         )
         element.click()
+
+class FilterNull(BaseFilter):
+    def filter(self, message):
+        return True
 
 if __name__ == "__main__":
     bot = Bot(TOKEN)
