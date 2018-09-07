@@ -39,7 +39,7 @@ class Bot:
         print "Polling"
     
     def stop(self):
-        self.driver.quit()
+        self.updater.stop()
     
     def callback(self, bot, update):
         try:
@@ -47,7 +47,7 @@ class Bot:
                 self.send(self.getchatid(0, update), "Welcome card!")
                 self.card(bot, update)
         except:
-            pass
+            traceback.print_exc()
         try:
             cmd = update.message.text.split(' ')[0].split('@')[0]
             if cmd == "/tarot":
@@ -59,7 +59,7 @@ class Bot:
             elif cmd == "/update":
                 self.update(bot, update)
         except:
-            pass
+            traceback.print_exc()
     
     def tarot(self, bot, update):
         print "Tarot"
