@@ -40,10 +40,6 @@ class Bot:
     
     def stop(self):
         self.driver.quit()
-        self.display.stop()
-        self.updater.stop()
-        subprocess.Popen("killall Web\ Content", shell=True)
-        subprocess.Popen("killall firefox-esr", shell=True)
     
     def callback(self, bot, update):
         try:
