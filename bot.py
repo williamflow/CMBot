@@ -176,7 +176,8 @@ class Bot:
         return self.bot.send_photo(chatid=chat, photo=url)
         
     def replyphoto(self, update, filename):
-        return self.bot.send_photo(self.getchatid(0, update), photo=open(filename, 'rb'))
+        return update.message.reply_photo(photo=open(filename, 'rb'))
+        #return self.bot.send_photo(self.getchatid(0, update), photo=open(filename, 'rb'))
         
     def getchatid(self, bot, update):
         return int(update.message.chat.id)
