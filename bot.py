@@ -179,7 +179,7 @@ class Bot:
         return self.bot.send_photo(self.getchatid(0, update), photo=open(filename, 'rb'))
         
     def getchatid(self, bot, update):
-        return update.message.chat.id
+        return int(update.message.chat.id)
     
     def sendtoelement(self, name, keys):
         element = self.driver.find_element_by_name(str(name))
