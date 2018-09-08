@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import telegram
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler, BaseFilter
@@ -36,7 +36,7 @@ class Bot:
         self.dispatcher.add_handler(MessageHandler(self.filternull, self.callback))
         #self.dispatcher.add_handler(CommandHandler('chart', self.chart))
         self.updater.start_polling()
-        print "Polling"
+        print("Polling")
     
     def stop(self):
         self.updater.stop()
@@ -62,7 +62,7 @@ class Bot:
             traceback.print_exc()
     
     def tarot(self, bot, update):
-        print "Tarot"
+        print("Tarot")
         text = update.message.text.split(' ')
         reply = []
         try:
@@ -76,8 +76,8 @@ class Bot:
         self.reply(update, "```"+"\n".join(reply)+"```")
     
     def card(self, bot, update):
-        print "Card"
-        print update.message
+        print("Card")
+        #print update.message
         try:
             text = update.message.text.split(' ')
             self.replyphoto(update, card[int(text[1])])
@@ -86,7 +86,7 @@ class Bot:
             self.replyphoto(update, card[int(n)])
             
     def wheel(self, bot, update):
-        print "Wheel"
+        print("Wheel")
         # dd mm yyyy hh mm ss
         text = update.message.text.split(' ')
         try:
@@ -99,13 +99,13 @@ class Bot:
             traceback.print_exc()
             
     def update(self, bot, update):
-        print "Update"
+        print("Update")
         result = subprocess.Popen("git pull", shell=True, stdout=subprocess.PIPE).stdout.read()
         self.reply(update, result)
         subprocess.Popen("sudo service cmbot restart", shell=True)
             
     def chart(self, bot, update):
-        print "Chart"
+        print("Chart")
         #name dd mm yyy hh mm city
         text = update.message.text.split(' ')
         while self.driveravaible is False:
@@ -167,18 +167,20 @@ class Bot:
         return self.bot.send_chat_action(chat_id=self.getchatid(0, update), action=telegram.ChatAction.TYPING)
         
     def reply(self, update, text):
-        return self.send(self.getchatid(0, update), text)
+        self.send(self.getchatid(0, update), text)
         #return update.message.reply_text(text, parse_mode="markdown")
         
     def sendphoto(self, chat, filename):
+        #self.bot.send_photo(chatid=chat, photo="https://beyondthestarsastrology.files.wordpress.com/2013/12/smaug.jpg")
         return self.bot.send_photo(chat_id=chat, photo=open(filename, 'rb'))
     
     def sendphotourl(self, chat, url):
         return self.bot.send_photo(chatid=chat, photo=url)
         
     def replyphoto(self, update, filename):
+        self.sendphoto(self.getchatid(0,update), filename)
         #return update.message.reply_photo(photo=open(filename, 'rb'))
-        return self.bot.send_photo(self.getchatid(0, update), photo=open(filename, 'rb'))
+        #return self.bot.send_photo(self.getchatid(0, update), photo=open(filename, 'rb'))
         
     def getchatid(self, bot, update):
         return int(update.message.chat.id)
@@ -199,6 +201,6 @@ class FilterNull(BaseFilter):
 
 if __name__ == "__main__":
     bot = Bot(TOKEN)
-    x = raw_input()
-    print "Stopping Bot..."
+    x = input()
+    print("Stopping Bot...")
     bot.stop()
