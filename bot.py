@@ -58,8 +58,14 @@ class Bot:
                 self.wheel(bot, update)
             elif cmd == "/update":
                 self.update(bot, update)
+            elif cmd == "/help":
+                self.help(bot, update)
         except:
             traceback.print_exc()
+    
+    def help(bot, update):
+        self.send(self.getchatid(0, update), "NO ONE IS GOING TO SAVE US!")
+        self.send(self.getchatid(0, update), "LEAVE ALL HOPES BEHIND")
     
     def tarot(self, bot, update):
         print("Tarot")
