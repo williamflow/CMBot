@@ -59,11 +59,11 @@ class Bot:
             elif cmd == "/update":
                 self.update(bot, update)
             elif cmd == "/help":
-                self.help(bot, update)
+                self.helpa(bot, update)
         except:
             traceback.print_exc()
     
-    def help(bot, update):
+    def helpa(bot, update):
         self.send(self.getchatid(0, update), "NO ONE IS GOING TO SAVE US!")
         self.send(self.getchatid(0, update), "LEAVE ALL HOPES BEHIND")
     
