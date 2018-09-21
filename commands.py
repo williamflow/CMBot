@@ -1,3 +1,10 @@
+from random import randint
+import subprocess
+import os
+import traceback
+import telegram
+from tarot import *
+
 class Commands:
     def __init__(self, bot):
         self.bot = bot
