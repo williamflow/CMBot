@@ -28,6 +28,7 @@ class Bot:
         #self.driver = webdriver.Firefox(firefox_options=options)
         #self.driveravaible = True
         self.bot = self.updater.bot
+        self.commands = commands.Commands(self.bot)
         self.dispatcher = self.updater.dispatcher
         self.filternull = FilterNull()
         self.dispatcher.add_handler(MessageHandler(self.filternull, self.callback))
@@ -65,6 +66,7 @@ class Bot:
         result = subprocess.Popen("git pull", shell=True, stdout=subprocess.PIPE).stdout.read()
         reply(update, result)
         reload(commands)
+        self.commands = commands.Commands(self.bot)
 
 
 class FilterNull(BaseFilter):
