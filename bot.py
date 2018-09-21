@@ -4,6 +4,8 @@ from telegram.ext import Updater, CommandHandler, Filters, MessageHandler, BaseF
 from private import TOKEN
 import commands
 import traceback
+import subprocess
+from importlib import reload
 #from pyvirtualdisplay import Display
 #from selenium import webdriver
 #from selenium.webdriver.firefox.options import Options
@@ -48,7 +50,7 @@ class Bot:
     def stop(self):
         self.updater.stop()
             
-    def update( bot, update):
+    def update(self, bot, update):
         print("Update")
         result = subprocess.Popen("git pull", shell=True, stdout=subprocess.PIPE).stdout.read()
         print(str(result))
