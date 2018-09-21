@@ -4,6 +4,8 @@ from telegram.ext import Updater, CommandHandler, Filters, MessageHandler, BaseF
 from private import TOKEN
 import commands
 import traceback
+import subprocess
+from importlib import reload
 #from pyvirtualdisplay import Display
 #from selenium import webdriver
 #from selenium.webdriver.firefox.options import Options
@@ -41,29 +43,28 @@ class Bot:
     def callback(self, bot, update):
         try:
             if len(update.message.new_chat_members) > 0:
-                commands.send(commands.getchatid(0, update), "Welcome card!")
-                commands.card(bot, update)
+                self.commands.send(commands.getchatid(0, update), "Welcome card!")
+                self.commands.card(bot, update)
         except:
             traceback.print_exc()
         try:
             cmd = update.message.text.split(' ')[0].split('@')[0]
             if cmd == "/tarot":
-                commands.tarot(bot, update)
+                self.commands.tarot(bot, update)
             elif cmd == "/card":
-                commands.card(bot, update)
+                self.commands.card(bot, update)
             elif cmd == "/wheel":
-                commands.wheel(bot, update)
+                self.commands.wheel(bot, update)
             elif cmd == "/update":
                 self.update(bot, update)
             elif cmd == "/help":
-                commands.helpa(bot, update)
+                self.commands.helpa(bot, update)
         except:
             traceback.print_exc()
             
-    def update( bot, update):
+    def update(self, bot, update):
         print("Update")
         result = subprocess.Popen("git pull", shell=True, stdout=subprocess.PIPE).stdout.read()
-        reply(update, result)
         reload(commands)
         self.commands = commands.Commands(self.bot)
 
