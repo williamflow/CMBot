@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler, BaseFilter
-from tarot import *
 from private import TOKEN
 import commands
 import traceback
@@ -60,7 +59,7 @@ class Bot:
         except:
             traceback.print_exc()
             
-     def update( bot, update):
+    def update( bot, update):
         print("Update")
         result = subprocess.Popen("git pull", shell=True, stdout=subprocess.PIPE).stdout.read()
         reply(update, result)

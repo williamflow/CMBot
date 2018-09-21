@@ -3,6 +3,7 @@ import subprocess
 import os
 import traceback
 import telegram
+from tarot import *
 
 def helpa(bot, update):
     send(getchatid(0, update), "NO ONE IS GOING TO SAVE US!")
