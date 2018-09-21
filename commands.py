@@ -50,7 +50,7 @@ class Commands:
     def card(self, bot, update):
         print("Card")
         #print update.message
-        n = randint(0, 77)
+        n = randint(0, 155)
         self.replyphoto(update, "deck/"+str(n)+".jpg")
             
     def wheel(self, bot, update):
