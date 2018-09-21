@@ -9,6 +9,26 @@ class Commands:
     def __init__(self, bot):
         self.bot = bot
         
+    def callback(self, bot, update):
+        try:
+            if len(update.message.new_chat_members) > 0:
+                self.send(commands.getchatid(0, update), "Welcome card!")
+                self.card(bot, update)
+        except:
+            traceback.print_exc()
+        try:
+            cmd = update.message.text.split(' ')[0].split('@')[0]
+            if cmd == "/tarot":
+                self.tarot(bot, update)
+            elif cmd == "/card":
+                self.card(bot, update)
+            elif cmd == "/wheel":
+                self.wheel(bot, update)
+            elif cmd == "/help":
+                self.helpa(bot, update)
+        except:
+            traceback.print_exc()
+        
     def helpa(self, bot, update):
         self.send(self.getchatid(0, update), "NO ONE IS GOING TO SAVE US!")
         self.send(self.getchatid(0, update), "LEAVE ALL HOPES BEHIND")

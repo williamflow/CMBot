@@ -35,35 +35,23 @@ class Bot:
         self.updater.start_polling()
         print("Polling")
     
-    def stop(self):
-        self.updater.stop()
-    
     def callback(self, bot, update):
         try:
-            if len(update.message.new_chat_members) > 0:
-                commands.send(commands.getchatid(0, update), "Welcome card!")
-                commands.card(bot, update)
-        except:
-            traceback.print_exc()
-        try:
             cmd = update.message.text.split(' ')[0].split('@')[0]
-            if cmd == "/tarot":
-                commands.tarot(bot, update)
-            elif cmd == "/card":
-                commands.card(bot, update)
-            elif cmd == "/wheel":
-                commands.wheel(bot, update)
-            elif cmd == "/update":
+            if cmd == "/update":
                 self.update(bot, update)
-            elif cmd == "/help":
-                commands.helpa(bot, update)
+                return
         except:
             traceback.print_exc()
+        self.commands.callback(bot, update)
+    
+    def stop(self):
+        self.updater.stop()
             
     def update( bot, update):
         print("Update")
         result = subprocess.Popen("git pull", shell=True, stdout=subprocess.PIPE).stdout.read()
-        reply(update, result)
+        print(str(result))
         reload(commands)
         self.commands = commands.Commands(self.bot)
 
