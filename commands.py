@@ -50,12 +50,8 @@ class Commands:
     def card(self, bot, update):
         print("Card")
         #print update.message
-        try:
-            text = update.message.text.split(' ')
-            self.replyphoto(update, card[int(text[1])])
-        except:
-            n = randint(0, 21)
-            self.replyphoto(update, card[int(n)])
+        n = randint(0, 77)
+        self.replyphoto(update, "deck/"+str(n)+".jpg")
             
     def wheel(self, bot, update):
         print("Wheel")
