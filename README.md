@@ -1,6 +1,6 @@
 # CMBot
 
-sudo apt install -y python3 python-pip3 libffi-dev libtiff-dev libssl-dev
+sudo apt install -y python3 python-pip3 libffi-dev libtiff-dev libssl-dev youtube-dl atomicparsley
 
 sudo pip3 install -U python-telegram-bot
 
