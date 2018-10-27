@@ -27,9 +27,9 @@ class Commands:
         matchObj = re.match( r'http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?', update.message.text, re.M|re.I)
         if matchObj:
             try:
-                title = subprocess.Popen('youtube-dl -f bestaudio --extract-audio --embed-thumbnail --add-metadata --output "%(title)s.%(ext)s" --quiet --exec "echo {}" "' + matchObj.group() + '"', shell=True, stdout=subprocess.PIPE).stdout.read().decode("utf-8")
+                title = subprocess.Popen('youtube-dl -f bestaudio --extract-audio --output "%(title)s.%(ext)s" --quiet --exec "echo {}" "' + matchObj.group() + '"', shell=True, stdout=subprocess.PIPE).stdout.read().decode("utf-8")
                 self.sendaudio(self.getchatid(0, update), title[0:-1])
-                subprocess.Popen('rm "' + title[0:-1] + '"', shell=True)
+                os.remove(title[0:-1])
             except:
                 traceback.print_exc()
     
